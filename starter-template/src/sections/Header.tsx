@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, MouseEvent } from "react";
 import Button from "@/components/Button";
 import { motion, useAnimate } from "motion/react";
 
@@ -32,6 +32,7 @@ const Header: FC = () => {
   const [topLineScope, topLineAnimate] = useAnimate();
 
   const [bottomLineScope, bottomLineAnimate] = useAnimate();
+  const [navScope, navAnimate] = useAnimate();
 
   useEffect(() => {
     if (isOpen) {
@@ -61,6 +62,17 @@ const Header: FC = () => {
           bottomLineScope.current,
           {
             rotate: -45,
+          },
+        ],
+      ]);
+      navAnimate([
+        [
+          navScope.current,
+          {
+            height: "100%",
+          },
+          {
+            duration: 0.7,
           },
         ],
       ]);
@@ -94,6 +106,15 @@ const Header: FC = () => {
           },
         ],
       ]);
+
+      navAnimate([
+        [
+          navScope.current,
+          {
+            height: 0,
+          },
+        ],
+      ]);
     }
   }, [
     isOpen,
@@ -101,19 +122,43 @@ const Header: FC = () => {
     topLineScope,
     bottomLineAnimate,
     bottomLineScope,
+    navScope,
+    navAnimate,
   ]);
+
+  const handleClickMobileNavItem = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsOpen(false);
+
+    // Element.scroll
+    const url = new URL(e.currentTarget.href);
+    const hash = url.hash;
+    const target = document.querySelector(hash);
+
+    if (!target) return;
+
+    target.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
   return (
     <header className="  ">
-      <div className="fixed  top-0 left-0 w-full h-full bg-stone-900">
+      <div
+        className="fixed  top-0 left-0 w-full h-0 overflow-hidden bg-stone-900"
+        ref={navScope}
+      >
         <nav className="mt-20 flex-col">
           {navItems.map(({ label, href }) => (
             <a
               href={href}
               key={label}
-              className="text-stone-200 border-t border-stone-800 last:border-b py-8"
+              className="text-stone-200 border-t border-stone-800 last:border-b py-8 group/nav-item relative isolate"
+              onClick={handleClickMobileNavItem}
             >
               <div className="container !max-w-full flex items-center justify-between">
-                <span className="text-3xl">{label}</span>
+                <span className="text-3xl group-hover/nav-item:pl-4 transition-all duration-500">
+                  {label}
+                </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -129,6 +174,7 @@ const Header: FC = () => {
                   />
                 </svg>
               </div>
+              <div className="absolute w-full h-0 bg-stone-800 group-hover/nav-item:h-full transition duration-500 bottom-0 -z-10"></div>
             </a>
           ))}
         </nav>
