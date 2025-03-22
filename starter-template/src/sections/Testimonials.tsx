@@ -39,7 +39,7 @@ const Testimonials: FC = () => {
   const testimonialIndex = 0;
   return (
     <section className="section">
-      <h2 className="text-4xl md:text-7xl flex flex-col overflow-hidden">
+      <h2 className="text-4xl md:text-7xl lg:text-8xl flex flex-col overflow-hidden">
         <span className="whitespace-nowrap">
           Some nice words from my past clients
         </span>
@@ -52,7 +52,10 @@ const Testimonials: FC = () => {
           {testimonials.map(
             ({ name, company, role, quote, image, imagePositionY }, index) =>
               index === testimonialIndex && (
-                <div key={name} className="grid md:grid-cols-5">
+                <div
+                  key={name}
+                  className="grid md:grid-cols-5 md:gap-8 lg:gap-16 md:items-center"
+                >
                   <div className="aspect-square md:col-span-2 md:aspect-[9/16]">
                     <Image
                       src={image}
@@ -64,13 +67,13 @@ const Testimonials: FC = () => {
                     />
                   </div>
                   <blockquote className="md:col-span-3">
-                    <div className="text-3xl md:text-5xl mt-8">
+                    <div className="text-3xl md:text-5xl mt-8 md:mt-0 lg:text-6xl">
                       <span>&ldquo;</span>
                       <span className="">{quote}</span>
                       <span>&rdquo;</span>
                     </div>
 
-                    <cite className="mt-4 md:mt-8 not-italic block md:text-lg">
+                    <cite className="mt-4 md:mt-8 not-italic block md:text-lg lg:text-xl">
                       {name}, {role} at {company}
                     </cite>
                   </blockquote>
@@ -78,7 +81,7 @@ const Testimonials: FC = () => {
               )
           )}
         </div>
-        <div className="flex gap-4 mt-6">
+        <div className="flex gap-4 mt-6 lg:mt-10">
           <button className="border border-stone-400 size-11 inline-flex items-center justify-center rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
