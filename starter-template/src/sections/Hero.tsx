@@ -5,10 +5,23 @@ import heroImage from "@/assets/images/hero-image.jpg";
 import Image from "next/image";
 import Button from "@/components/Button";
 import SplitType from "split-type";
-import { motion, stagger, useAnimate } from "motion/react";
+import {
+  motion,
+  stagger,
+  useAnimate,
+  useScroll,
+  useTransform,
+} from "motion/react";
 
 const Hero: FC = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const scrollingDiv = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: scrollingDiv,
+    offset: ["start end", "end end"],
+  });
+
+  const portraitWidth = useTransform(scrollYProgress, [0, 1], ["100%", "240%"]);
 
   useEffect(() => {
     if (!titleRef.current) return;
@@ -67,7 +80,7 @@ const Hero: FC = () => {
                 <Button
                   variant="secondary"
                   iconAfter={
-                    <div className="overflow-hiddne size-5">
+                    <div className="overflow-hidden size-5">
                       <div className="h-5 w-10 flex group-hover/button:-translate-x-1/2 transition-transform duration-500">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -127,18 +140,23 @@ const Hero: FC = () => {
           </div>
         </div>
 
-        <div className="md:col-span-5">
-          <div className="mt-20 md:mt-0 md:h-full">
+        <div className="md:col-span-5 relative">
+          <motion.div
+            className="mt-20 md:mt-0 md:size-full md:absolute md:right-0 max-md:!w-full"
+            style={{
+              width: portraitWidth,
+            }}
+          >
             <Image
               src={heroImage}
               alt="My portraits"
               className="size-full object-cover"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
 
-      <div className="h-[200vh] border-4 border-red-500"></div>
+      <div className="md:h-[200vh] " ref={scrollingDiv}></div>
     </section>
   );
 };

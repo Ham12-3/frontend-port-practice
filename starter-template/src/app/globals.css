@@ -13,7 +13,7 @@
 }
 
 .word {
-    @apply translate-y-3/4;
+    @apply translate-y-full;
 }
 
 
