@@ -53,7 +53,7 @@ const Projects: FC = () => {
                 </div>
 
                 <div className="mt-8 md:mt-0 flex justify-between items-center md:grid md:[grid-template-columns:1fr_300px_max-content] md:gap-8">
-                  <div className="lg:group-hover/project:pl-4 transition-all duration-700">
+                  <div className="lg:group-hover/project:pl-8 transition-all duration-700">
                     <h3 className="text-2xl md:text-3xl lg:text-4xl">{name}</h3>
                   </div>
 
@@ -66,7 +66,7 @@ const Projects: FC = () => {
                       />
                     </div>
                   </div>
-                  <div className="lg:group-hover/project:pr-4 transition-all duration-700">
+                  <div className="lg:group-hover/project:pr-8 transition-all duration-700">
                     <div className="size-6 overflow-hidden">
                       <div className="h-6 w-12 flex group-hover/project:-translate-x-1/2 transition-transform duration-300">
                         <svg
