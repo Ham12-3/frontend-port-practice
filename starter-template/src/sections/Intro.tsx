@@ -1,7 +1,7 @@
 "use client";
 import { FC, useEffect, useRef } from "react";
-import { stagger, useAnimate, useInView } from "motion/react";
-import SplitType from "split-type";
+import { useInView } from "motion/react";
+
 import useTextRevealAnimation from "@/hooks/useTextRevealAnimation";
 
 const Intro: FC = () => {
@@ -16,39 +16,6 @@ const Intro: FC = () => {
       entranceAnimation();
     }
   }, [inView, entranceAnimation]);
-  // useEffect(() => {
-  //   if (!scope.current) return;
-
-  //   const splitText = new SplitType(scope.current.querySelector("h2"), {
-  //     types: "lines,words",
-  //     tagName: "span",
-  //   });
-
-  //   // Set initial styles for words
-  //   splitText.words?.forEach((word) => {
-  //     word.style.display = "inline-block";
-  //     word.style.transform = "translateY(100%)";
-  //     word.style.opacity = "0";
-  //   });
-  // }, [scope]);
-
-  // useEffect(() => {
-  //   if (inView && scope.current) {
-  //     const words = scope.current.querySelectorAll("h2 .word");
-
-  //     animate(
-  //       words,
-  //       {
-  //         transform: "translateY(0)",
-  //         opacity: 1,
-  //       },
-  //       {
-  //         duration: 0.5,
-  //         delay: stagger(0.1),
-  //       }
-  //     );
-  //   }
-  // }, [inView, animate]);
 
   return (
     <section className="section lg:mt-20 mt-12 md:mt-16" ref={sectionRef}>
