@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect } from "react";
+import { FC, useEffect, MouseEvent } from "react";
 import Button from "@/components/Button";
 import useTextRevealAnimation from "@/hooks/useTextRevealAnimation";
 import { useInView } from "motion/react";
@@ -19,6 +19,21 @@ const Footer: FC = () => {
       entranceAnimation();
     }
   }, [inView, entranceAnimation]);
+
+  const handleClickMobileNavItem = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    // Element.scroll
+    const url = new URL(e.currentTarget.href);
+    const hash = url.hash;
+    const target = document.querySelector(hash);
+
+    if (!target) return;
+
+    target.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
   return (
     <footer className="bg-stone-900 text-white " id="contact">
       <div className="container">
