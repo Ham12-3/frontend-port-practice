@@ -51,7 +51,12 @@ const FAQs: FC = () => {
                   faqIndex === selectedIndex && "h-full"
                 )}
               ></div>
-              <div className="flex items-center justify-between gap-4 ">
+              <div
+                className={twMerge(
+                  "flex items-center justify-between gap-4 transition-all duration-700 group-hover/faq:lg:px-8",
+                  faqIndex === selectedIndex && "lg:px-8"
+                )}
+              >
                 <div className="text-2xl md:text-3xl lg:text-4xl">
                   {question}
                 </div>
@@ -80,7 +85,7 @@ const FAQs: FC = () => {
               <AnimatePresence>
                 {faqIndex === selectedIndex && (
                   <motion.div
-                    className="overflow-hidden"
+                    className="overflow-hidden lg:px-8"
                     initial={{
                       height: 0,
                     }}
